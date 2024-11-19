@@ -1,11 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import globalStyles from '../globalStyle';
 
 export default function Buttons({ text, type = 'PRIMARY' }) {
     return (
         <View style={styles.btnContainer}>
             <TouchableOpacity style={[styles.btn, styles[`container_${type}`]]}>
-                <Text style={[styles.btnText, styles[`text_${type}`]]}>{text}</Text>
+                <Text style={[styles.btnText, styles[`text_${type}`], globalStyles.text]}>{text}</Text>
             </TouchableOpacity>
         </View>
     )
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     },
     container_TERTIARY: {},
     text_TERTIARY: {
-        fontSize: 14,
+        fontSize: 12,
         color: 'gray',
     },
 })

@@ -1,31 +1,36 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import Input from '../CustomInputs/Input'
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import Input from '../CustomInputs/Input';
 import Buttons from '../CustomButtons/Buttons';
+import globalStyles from '../globalStyle';
 
 export default function Login() {
-    Dimensions.get('window').height * 0.15;
+
+    const screenHeight = Dimensions.get('window').height;
+    const headerMarginBottom = screenHeight * 0.05;
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     return (
         <View style={[styles.loginContainer, styles.sameStyle]}>
-            <View style={[styles.head, styles.sameStyle]}>
-                <Text style={styles.h1}>Get you started !</Text>
-                <Text style={styles.h2}>Sign to your account.</Text>
+            <View style={[styles.head, { marginBottom: headerMarginBottom }, styles.sameStyle]}>
+                <Text style={[styles.h1, globalStyles.text]}>Get you started!</Text>
+                <Text style={[styles.h2, globalStyles.text]}>Sign in to your account.</Text>
             </View>
             <View style={styles.lablesBox}>
 
-                <Text style={styles.label}>Email :</Text>
+                <Text style={[styles.label, globalStyles.text]}>Email:</Text>
                 <Input
                     placeholder={'xyz@email.com'}
                     value={username}
                     setValue={setUsername} />
 
-                <Text style={styles.label}>Password :</Text>
+                <Text style={[styles.label, globalStyles.text]}>Password:</Text>
                 <Input
                     value={password}
                     setValue={setPassword}
-                    placeholder={'At least 8 character.'}
+                    placeholder={'At least 8 characters.'}
                     secureTextEntry={true} />
 
                 <Buttons text='Submit' />
@@ -34,25 +39,24 @@ export default function Login() {
                     type='TERTIARY'
                 />
                 <Buttons
-                    text="Don't have an account ? Create one."
+                    text="Don't have an account? Create one."
                     type='TERTIARY'
                 />
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     loginContainer: {
         flex: 1,
-        fontFamily: 'RobotoSerif-Medium',
     },
     sameStyle: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     head: {
-        marginBottom: Dimensions.get('window').height * 0.08,
+        // marginBottom is dynamically calculated using screen height
     },
     h1: {
         fontSize: 26,
@@ -62,5 +66,9 @@ const styles = StyleSheet.create({
     },
     lablesBox: {
         width: '90%',
-    }
-})
+    },
+    label: {
+        fontSize: 14,
+        marginBottom: 5,
+    },
+});
