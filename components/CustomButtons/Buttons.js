@@ -14,7 +14,7 @@ export default function Buttons({ text, type = 'PRIMARY' }) {
 
 const styles = StyleSheet.create({
     btnContainer: {
-        marginTop: 8,
+        marginTop: 4,
     },
 
     btn: {
