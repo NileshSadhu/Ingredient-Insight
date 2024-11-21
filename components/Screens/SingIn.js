@@ -1,13 +1,16 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Input from '../CustomInputs/Input';
 import Buttons from '../CustomButtons/Buttons';
 import globalStyles from '../globalStyle';
+import { authContext } from '../../Context/Authentication';
 
-export default function Login() {
+export default function SingIn() {
 
     const screenHeight = Dimensions.get('window').height;
     const headerMarginBottom = screenHeight * 0.05;
+
+    const {} = useContext(authContext);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

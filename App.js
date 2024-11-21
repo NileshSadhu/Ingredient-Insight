@@ -2,8 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import globalStyles from './components/globalStyle';
-import Login from './components/Screens/Login';
-import SignUp from './components/Screens/SignUp';
+import { AuthProvider } from './Context/Authentication';
+import AppNav from './Navigation/AppNav';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -11,10 +11,9 @@ export default function App() {
   });
 
   return (
-    <SafeAreaView  style={styles.container}>
-      {/* <Login /> */}
-      <SignUp />
-    </SafeAreaView>
+    <AuthProvider styles={styles.container}>
+      <AppNav />
+    </AuthProvider>
   );
 }
 
