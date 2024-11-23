@@ -1,24 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { useFonts } from 'expo-font';
-import globalStyles from './components/globalStyle';
-import { AuthProvider } from './Context/Authentication';
-import AppNav from './Navigation/AppNav';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import globalStyle from './globalStyle'
+import { useFonts } from 'expo-font'
+import SignIn from './Components/LoginScreens/SignIn'
+import GetStarted from './Components/LoginScreens/GetStarted'
+import SignUp from './Components/LoginScreens/SignUp'
 
-export default function App() {
+const App = () => {
+
   const [fontsLoaded] = useFonts({
     'RobotoSerif-Medium': require('./assets/Fonts/RobotoSerif-Medium.ttf'),
-  });
+  })
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
-    <AuthProvider styles={styles.container}>
-      <AppNav />
-    </AuthProvider>
-  );
+    <View style={globalStyle.container}>
+      {/* <SignIn /> */}
+      {/* <GetStarted /> */}
+      <SignUp />
+    </View>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+export default App;
