@@ -1,13 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import globalStyle from './globalStyle'
 import { useFonts } from 'expo-font'
-import SignIn from './Components/LoginScreens/SignIn'
-import GetStarted from './Components/LoginScreens/GetStarted'
-import SignUp from './Components/LoginScreens/SignUp'
+import { AuthProvider } from './Context/AuthContext'
+import AppNav from './Components/AppNav'
 
-const App = () => {
-
+const App = ({ Navigator }) => {
   const [fontsLoaded] = useFonts({
     'RobotoSerif-Medium': require('./assets/Fonts/RobotoSerif-Medium.ttf'),
   })
@@ -17,11 +13,9 @@ const App = () => {
   }
 
   return (
-    <View style={globalStyle.container}>
-      {/* <SignIn /> */}
-      {/* <GetStarted /> */}
-      <SignUp />
-    </View>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
   )
 }
 

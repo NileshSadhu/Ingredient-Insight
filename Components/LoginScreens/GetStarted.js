@@ -2,9 +2,9 @@ import { View, Text, SafeAreaView, Image, Dimensions } from 'react-native'
 import React from 'react'
 import globalStyle from '../../globalStyle'
 import CustomButton from '../CustomButton';
+import SignIn from './SignIn';
 
-
-export default function GetStarted() {
+export default function GetStarted({navigation}) {
     const screenHeight = Dimensions.get('window').height;
 
     return (
@@ -28,7 +28,7 @@ export default function GetStarted() {
 
             {/* Button Container */}
             <View style={globalStyle.bottomContainer}>
-                <CustomButton text={'Get Started'}/>
+                <CustomButton text={'Get Started'} onPress={()=> navigation.navigate(SignIn)}/>
             </View>
         </SafeAreaView >
     )

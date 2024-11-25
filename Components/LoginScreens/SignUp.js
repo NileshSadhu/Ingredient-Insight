@@ -5,6 +5,7 @@ import Inputs from '../Inputs';
 import CustomButton from '../CustomButton';
 import { string, object, ref } from 'yup';
 import { Formik } from 'formik';
+import SignIn from './SignIn';
 
 const registerSchema = object({
     username: string().required('Username is required.')
@@ -21,7 +22,7 @@ const registerSchema = object({
         .required('Confirm Password is required.'),
 });
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
     const handleSignUp = (values) => {
         console.log('Register Successful with values:', values);
     };
@@ -97,6 +98,7 @@ const SignUp = () => {
                             <TouchableOpacity
                                 style={globalStyle.center}
                                 accessibilityRole="button"
+                                onPress={()=>navigation.navigate(SignIn)}
                             >
                                 <Text style={[globalStyle.text, globalStyle.linkBtn]}>
                                     Already have an account?
