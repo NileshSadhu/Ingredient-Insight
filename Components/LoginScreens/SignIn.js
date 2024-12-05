@@ -1,50 +1,37 @@
-import { StyleSheet, Text, View, TouchableOpacity, Alert, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import React, { useContext } from 'react';
 import globalStyle from '../../globalStyle';
+import CustomInputs from '../CustomInputs';
 import CustomButton from '../CustomButton';
-import Inputs from '../Inputs';
-import { object, string } from 'yup';
+import { signInSchema } from './Schema';
 import { Formik } from 'formik';
-import SignUp from './SignUp';
 import { AuthContext } from '../../Context/AuthContext';
 
-const loginSchema = object({
-    email: string()
-        .required('Email is required.')
-        .email('Invalid Email.'),
-    password: string()
-        .required('Password is required.')
-        .min(8, 'Minimum 8 characters are required.')
-        .max(16, 'Password length should not exceed 16 characters.'),
-});
-
 const SignIn = ({ navigation }) => {
+    const { logIn } = useContext(AuthContext);
 
-    const { login } = useContext(AuthContext);
-
-    const handleLogin = (values) => {
-        console.log('Form Submitted');
-        Alert.alert('Login Successful');
+    const handlelogin = async (values) => {
+        try {
+            await logIn(values.email, values.password); // Passing email and password to logIn
+        } catch (error) {
+            Alert.alert('Login Failed', error.message || "Please check your credentials.");
+        }
     };
 
     return (
-        <View style={styles.loginContainer}>
-            <View style={globalStyle.center}>
-                <Text style={[globalStyle.h1, globalStyle.text]}>Get You Started</Text>
-                <Text style={globalStyle.text}>Sign in to your account.</Text>
-            </View>
-
+        <View style={globalStyle.container}>
+            <Text style={[globalStyle.text, globalStyle.h1]}>Get you started!</Text>
+            <Text style={[globalStyle.text, globalStyle.h2]}>Sign In to your account.</Text>
             <Formik
                 initialValues={{ email: '', password: '' }}
-                validationSchema={loginSchema}
-                onSubmit={(values) => handleLogin(values)}
+                validationSchema={signInSchema}
+                onSubmit={handlelogin} // Call handlelogin on submit
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-                    <View style={styles.formSection}>
-                        {/* Email Field */}
-                        <Text style={globalStyle.text}>Email:</Text>
-                        <Inputs
-                            placeholder="xyz@email.com"
+                    <View style={styles.inputField}>
+                        <Text style={globalStyle.text}>Email :</Text>
+                        <CustomInputs
+                            placeholder={'xyz@example.com'}
                             value={values.email}
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
@@ -52,11 +39,9 @@ const SignIn = ({ navigation }) => {
                         {touched.email && errors.email && (
                             <Text style={globalStyle.errorText}>{errors.email}</Text>
                         )}
-
-                        {/* Password Field */}
-                        <Text style={globalStyle.text}>Password:</Text>
-                        <Inputs
-                            placeholder="At least 8 characters."
+                        <Text style={globalStyle.text}>Password :</Text>
+                        <CustomInputs
+                            placeholder={'At least 8 characters long.'}
                             value={values.password}
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -65,32 +50,9 @@ const SignIn = ({ navigation }) => {
                         {touched.password && errors.password && (
                             <Text style={globalStyle.errorText}>{errors.password}</Text>
                         )}
-
-                        <CustomButton text="Submit" onPress={()=> {
-                            login; 
-                            handleSubmit
-                        } }/>
-
-                        {/* Forget Password */}
-                        <TouchableOpacity
-                            style={globalStyle.center}
-                            accessibilityRole="link"
-                        >
-                            <Text style={[globalStyle.text, globalStyle.linkBtn]}>
-                                Forget Password
-                            </Text>
-                        </TouchableOpacity>
-
-                        {/* Create Account */}
-                        <TouchableOpacity
-                            style={globalStyle.center}
-                            accessibilityRole="link"
-                            onPress={() => navigation.navigate('SignUp')}
-                        >
-                            <Text style={[globalStyle.text, globalStyle.linkBtn]}>
-                                Don't have an account? Create one.
-                            </Text>
-                        </TouchableOpacity>
+                        <CustomButton text={'Submit'} type={'Primary'} onPress={handleSubmit} />
+                        <CustomButton text={'Forget Password'} type={'Secondary'} onPress={() => navigation.navigate('ForgetPasswordS1')} />
+                        <CustomButton text={"Don't have an account? Create one."} type='Secondary' onPress={() => navigation.navigate('SignUp')} />
                     </View>
                 )}
             </Formik>
@@ -101,13 +63,8 @@ const SignIn = ({ navigation }) => {
 export default SignIn;
 
 const styles = StyleSheet.create({
-    loginContainer: {
-        flex: 1,
-        width: '100%',
-        paddingHorizontal: '5%',
-        justifyContent: 'center',
-    },
-    formSection: {
-        marginVertical: 50,
+    inputField: {
+        width: '90%',
+        marginTop: '10%',
     },
 });

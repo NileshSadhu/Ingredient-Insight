@@ -1,47 +1,57 @@
-import React, { useContext } from 'react'
-import { View, ActivityIndicator, Text } from 'react-native'
-import GetStarted from '../Components/LoginScreens/GetStarted'
-import SignUp from './LoginScreens/SignUp'
-import SignIn from './LoginScreens/SignIn'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { AuthContext } from '../Context/AuthContext'
-import globalStyle from '../globalStyle'
+import React, { useContext } from 'react';
+import { View, ActivityIndicator, SafeAreaView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const AppNav = ({ Navigator }) => {
-    const Stack = createNativeStackNavigator()
-    const { isLoading, userToken } = useContext(AuthContext)
+import HomeScreen from '../HomeScreen';
+import GetStarted from './LoginScreens/GetStarted';
+import SignIn from './LoginScreens/SignIn';
+import SignUp from './LoginScreens/SignUp';
+import ForgetPasswordS1 from './LoginScreens/ForgetPasswordS1';
+import ForgetPasswordS2 from './LoginScreens/ForgetPasswordS2';
+import { AuthContext } from '../Context/AuthContext';
+
+const Stack = createNativeStackNavigator();
+
+const AuthStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="GetStarted" component={GetStarted} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="ForgetPasswordS1" component={ForgetPasswordS1} />
+            <Stack.Screen name="ForgetPasswordS2" component={ForgetPasswordS2} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name='HomeScreen' component={HomeScreen} />
+        </Stack.Navigator>
+    );
+};
+
+const MainStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        </Stack.Navigator>
+    );
+};
+
+const AppNav = () => {
+    const { isLoading, userToken } = useContext(AuthContext);
 
     if (isLoading) {
         return (
-            <View style={globalStyle.container}>
-                <ActivityIndicator size={'large'} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size='large' color="#0000ff" />
             </View>
-        )
+        );
     }
 
     return (
         <NavigationContainer>
-            {userToken !== null ? (
-                <Home />
-            ) : (
-                <Stack.Navigator>
-                    <Stack.Screen component={GetStarted} name='GetStarted' options={{ headerShown: false }} />
-                    <Stack.Screen component={SignIn} name='SignIn' options={{ headerShown: false }} />
-                    <Stack.Screen component={SignUp} name='SignUp' options={{ headerShown: false }} />
-                </Stack.Navigator>
-            )
-            }
+            <SafeAreaView style={{ flex: 1 }}>
+                {userToken ? <MainStack /> : <AuthStack />}
+            </SafeAreaView>
         </NavigationContainer>
-    )
-}
-
-const Home = () => {
-    return (
-        <View style={globalStyle.container}>
-            <Text>Home Screen</Text>
-        </View>
     );
-}
+};
 
-export default AppNav
+export default AppNav;

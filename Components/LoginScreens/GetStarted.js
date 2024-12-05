@@ -1,35 +1,51 @@
-import { View, Text, SafeAreaView, Image, Dimensions } from 'react-native'
+import { Image, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import globalStyle from '../../globalStyle'
 import CustomButton from '../CustomButton';
-import SignIn from './SignIn';
 
-export default function GetStarted({navigation}) {
-    const screenHeight = Dimensions.get('window').height;
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
+const GetStarted = ({ navigation }) => {
     return (
-        <SafeAreaView style={globalStyle.container}>
-            {/* App Name */}
-            <View style={globalStyle.header}>
-                <Text style={[globalStyle.h1, globalStyle.text]}>Ingredient Insigth</Text>
-                <Text style={globalStyle.text}>"Curious what inside your Favourite</Text>
-                <Text style={globalStyle.text}>packet food?"</Text>
+        <View style={globalStyle.container}>
+            <View style={styles.topContainer}>
+                <Text style={[globalStyle.text, globalStyle.h1]}>Ingredient Insigth</Text>
+                <Text style={[globalStyle.text, globalStyle.h2]}>Safety | Transparency | Trust</Text>
             </View>
-
-            {/* Panda Image */}
-            <View style={globalStyle.imageContainer}>
+            <View style={styles.imgContainer}>
                 <Image
-                    source={(require('../../assets/panda.png'))}
-                    style={[globalStyle.img,
-                    { width: screenHeight * 0.6, height: screenHeight * 0.6 }
-                    ]}
+                    source={require('../../assets/Images/panda.png')}
+                    style={styles.img}
                 />
             </View>
-
-            {/* Button Container */}
-            <View style={globalStyle.bottomContainer}>
-                <CustomButton text={'Get Started'} onPress={()=> navigation.navigate(SignIn)}/>
+            <View style={styles.btnContainer}>
+                <CustomButton text={'Get Started'} onPress={() => navigation.navigate('SignIn')} />
             </View>
-        </SafeAreaView >
+        </View>
     )
 }
+
+export default GetStarted
+
+const styles = StyleSheet.create({
+    topContainer: {
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    img: {
+        height: height * 0.5,
+        width: width * 0.9,
+        resizeMode: 'contain',
+    },
+    imgContainer: {
+        flex: 3,
+        justifyContent: 'flex-start',
+    },
+    btnContainer: {
+        justifyContent: 'flex-end',
+        width: '90%',
+        margin: 10,
+    }
+})

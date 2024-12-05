@@ -1,16 +1,13 @@
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import { useFonts } from 'expo-font'
-import { AuthProvider } from './Context/AuthContext'
-import AppNav from './Components/AppNav'
+import AppNav from './Components/AppNav';
+import { AuthProvider } from './Context/AuthContext';
 
-const App = ({ Navigator }) => {
+const App = () => {
   const [fontsLoaded] = useFonts({
     'RobotoSerif-Medium': require('./assets/Fonts/RobotoSerif-Medium.ttf'),
-  })
-
-  if (!fontsLoaded) {
-    return null;
-  }
+  });
 
   return (
     <AuthProvider>
@@ -19,4 +16,4 @@ const App = ({ Navigator }) => {
   )
 }
 
-export default App;
+export default App
