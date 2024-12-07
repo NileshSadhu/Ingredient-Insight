@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import DrawerNav from './Drawer/DrawerNav';
 
 import HomeScreen from '../HomeScreen';
 import GetStarted from './LoginScreens/GetStarted';
@@ -28,8 +29,8 @@ const AuthStack = () => {
 
 const MainStack = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="DrawerNav" component={DrawerNav} />
         </Stack.Navigator>
     );
 };
