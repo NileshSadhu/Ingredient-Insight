@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import React, { useContext } from 'react';
 import globalStyle from '../../globalStyle';
-import CustomInputs from '../CustomInputs';
-import CustomButton from '../CustomButton';
+import CustomInputs from '../Customs/CustomInputs';
+import CustomButton from '../Customs/CustomButton';
 import { signInSchema } from './Schema';
 import { Formik } from 'formik';
 import { AuthContext } from '../../Context/AuthContext';
@@ -12,7 +12,7 @@ const SignIn = ({ navigation }) => {
 
     const handlelogin = async (values) => {
         try {
-            await logIn(values.email, values.password); // Passing email and password to logIn
+            await logIn(values.email, values.password);
         } catch (error) {
             Alert.alert('Login Failed', error.message || "Please check your credentials.");
         }
@@ -51,7 +51,7 @@ const SignIn = ({ navigation }) => {
                             <Text style={globalStyle.errorText}>{errors.password}</Text>
                         )}
                         <CustomButton text={'Submit'} type={'Primary'} onPress={handleSubmit} />
-                        <CustomButton text={'Forget Password'} type={'Secondary'} onPress={() => navigation.navigate('ForgetPasswordS1')} />
+                        <CustomButton text={'Forget Password'} type={'Secondary'} onPress={() => navigation.navigate('Email')} />
                         <CustomButton text={"Don't have an account? Create one."} type='Secondary' onPress={() => navigation.navigate('SignUp')} />
                     </View>
                 )}

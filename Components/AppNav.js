@@ -2,14 +2,13 @@ import React, { useContext } from 'react';
 import { View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DrawerNav from './Drawer/DrawerNav';
 
 import HomeScreen from '../HomeScreen';
 import GetStarted from './LoginScreens/GetStarted';
 import SignIn from './LoginScreens/SignIn';
 import SignUp from './LoginScreens/SignUp';
-import ForgetPasswordS1 from './LoginScreens/ForgetPasswordS1';
-import ForgetPasswordS2 from './LoginScreens/ForgetPasswordS2';
+import Email from './LoginScreens/Email';
+import VerifyOTP from './LoginScreens/VerifyOTP';
 import { AuthContext } from '../Context/AuthContext';
 
 const Stack = createNativeStackNavigator();
@@ -19,18 +18,10 @@ const AuthStack = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="GetStarted" component={GetStarted} />
             <Stack.Screen name="SignIn" component={SignIn} />
-            <Stack.Screen name="ForgetPasswordS1" component={ForgetPasswordS1} />
-            <Stack.Screen name="ForgetPasswordS2" component={ForgetPasswordS2} />
+            <Stack.Screen name="Email" component={Email} />
+            <Stack.Screen name="VerifyOTP" component={VerifyOTP} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name='HomeScreen' component={HomeScreen} />
-        </Stack.Navigator>
-    );
-};
-
-const MainStack = () => {
-    return (
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="DrawerNav" component={DrawerNav} />
         </Stack.Navigator>
     );
 };
@@ -49,7 +40,7 @@ const AppNav = () => {
     return (
         <NavigationContainer>
             <SafeAreaView style={{ flex: 1 }}>
-                {userToken ? <MainStack /> : <AuthStack />}
+                {userToken ? <HomeScreen /> : <AuthStack />}
             </SafeAreaView>
         </NavigationContainer>
     );

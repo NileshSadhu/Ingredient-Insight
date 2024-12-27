@@ -13,10 +13,12 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
         try {
             // Fixed URL
-            const response = await axios.post('http://192.168.38.196:3000/login', { email, password });
-
+            const response = await axios.post('http://192.168.189.196:3000/login', { email, password });
+            console.log(response);
             // Extract token from response
             const { token } = response.data;
+            
+            console.log("Received JWT Token:", token);
 
             // Store token in AsyncStorage
             await AsyncStorage.setItem("userToken", token);
@@ -29,24 +31,23 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const register = async (username, email, password) => {
+    const register = async (user, email, password) => {
         setIsLoading(true);
         try {
-            const response = await axios.post('http://192.168.38.196:3000/register', {
-                username,
+            const response = await axios.post('http://192.168.189.196:3000/register', {
+                user,
                 email,
                 password,
             });
 
             const { token } = response.data;
-            if (!token) {
+            if (token) {
                 await AsyncStorage.setItem('userToken', token);
                 setUserToken(token);
+                alert("Registration Successful! You are now logged in.");
             } else {
                 alert("Registration failed. No token received.");
             }
-
-            alert("Registration Successful! Please log in.");
         } catch (error) {
             console.error("SignUp Error: ", error.message);
             alert(error.response?.data?.message || "Registration failed. Please try again.");

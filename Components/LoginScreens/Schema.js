@@ -11,7 +11,7 @@ export const signInSchema = Yup.object().shape({
 });
 
 export const signUpSchema = Yup.object().shape({
-    username: Yup.string()
+    user: Yup.string()
         .required('Username is required.'),
     email: Yup.string()
         .required('Email is required.')
@@ -30,7 +30,7 @@ export const forgetPasswordSchema = Yup.object().shape({
         .required('Email is required.')
         .email('Please enter a valid email address.'),
 
-    number: Yup.string()
+    otp: Yup.string()
         .required('OTP Pin is required.')
         .matches(/^\d{4}$/, 'OTP must be exactly 4 digits.'),
 });

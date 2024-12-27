@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import globalStyle from '../../globalStyle';
+import globalStyle from '../globalStyle';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({

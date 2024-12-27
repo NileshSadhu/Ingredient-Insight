@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
 import globalStyle from '../../globalStyle'
-import CustomButton from '../CustomButton';
+import CustomButton from '../Customs/CustomButton';
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;

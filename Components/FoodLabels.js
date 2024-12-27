@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, Dimensions } from 'react-native'
 import React from 'react'
-import globalStyle from '../../globalStyle';
+import globalStyle from '../globalStyle';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -86,12 +86,15 @@ const FoodLabels = () => {
 
     return (
         <View style={[globalStyle.container, styles.container]}>
-            <FlatList
-                data={labels}
-                renderItem={showLabels}
-                keyExtractor={(item) => item.id}
-                contentContainerStyle={styles.listContainer}
-            />
+            <Text style={[styles.head, globalStyle.text]}>Labels</Text>
+            <View style={styles.card}>
+                <FlatList
+                    data={labels}
+                    renderItem={showLabels}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={styles.listContainer}
+                />
+            </View>
         </View>
     )
 }
@@ -100,9 +103,20 @@ export default FoodLabels;
 
 const styles = StyleSheet.create({
     container: {
-        // marginTop: '20%',
-        paddingHorizontal: '6%',
+        backgroundColor: '#3BE620',
+        paddingTop: '20%',
+    },
+    head: {
+        fontSize: RFValue(22),
+        textAlign: 'center',
+        marginTop: 20,
+    },
+    card: {
+        marginTop: '10%',
+        paddingTop: '10%',
         backgroundColor: '#f9f9f9',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
     },
     listContainer: {
         paddingBottom: 20,
@@ -113,6 +127,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
         backgroundColor: '#ffffff',
+        marginLeft: '5%',
+        marginRight: '5%',
 
         shadowColor: '#000',
         shadowOpacity: 0.1,
@@ -122,7 +138,7 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 6,
         elevation: 4,
-        width: '100%',
+        width: '90%',
     },
     img: {
         width: 80,
