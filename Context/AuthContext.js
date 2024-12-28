@@ -14,11 +14,11 @@ export const AuthProvider = ({ children }) => {
         try {
             // Fixed URL
             const response = await axios.post('http://192.168.189.196:3000/login', { email, password });
-            console.log(response);
+            // console.log(response);
             // Extract token from response
             const { token } = response.data;
             
-            console.log("Received JWT Token:", token);
+            // console.log("Received JWT Token:", token);
 
             // Store token in AsyncStorage
             await AsyncStorage.setItem("userToken", token);

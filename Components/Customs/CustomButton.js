@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
 import globalStyle from '../../globalStyle';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -10,13 +10,18 @@ const CustomButton = ({ text, type = 'Primary', onPress }) => {
             onPress={onPress}>
             <Text style={[globalStyle.text, styles[`text_${type}`]]}>{text}</Text>
         </TouchableOpacity>
-    )
+    );
 }
 
-export default CustomButton
+export default CustomButton;
 
 const styles = StyleSheet.create({
     btn: {
+        shadowColor: '#000',         // Color of the shadow
+        shadowOffset: { width: 0, height: 2 }, // Position of the shadow
+        shadowOpacity: 0.25,        // Opacity of the shadow
+        shadowRadius: 3.84,         // Blur radius of the shadow
+        elevation: 5,               // Required for Android to cast shadow
         alignItems: 'center',
     },
     container_Primary: {
@@ -31,5 +36,5 @@ const styles = StyleSheet.create({
         color: 'gray',
         marginVertical: 3,
         fontSize: RFValue(12),
-    }
-})
+    },
+});
