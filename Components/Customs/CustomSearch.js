@@ -8,7 +8,7 @@ const CustomSearch = () => {
             <Icon name="search" size={25} color='#3BE620' style={{ paddingTop: 8, }} />
             <TextInput
                 placeholder='ex: Maggi'
-                style={{paddingHorizontal: 10,}}
+                style={{paddingHorizontal: 10, width: '90%'}}
             />
         </View>
     )
@@ -22,7 +22,14 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         flexDirection: 'row',
         borderWidth: 1,
-        borderRadius: 20,
-        borderColor: '#d9d1d0'
+        borderRadius: 5,
+        borderColor: '#d9d1d0',
+        backgroundColor: '#fff',
+
+        shadowOffset: {width: 0, height: 3},
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowColor: '#000',
+        elevation: 2,
     }
 })

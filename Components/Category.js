@@ -4,7 +4,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import globalStyle from '../globalStyle';
 
 const categories = [
-    { id: 1, title: 'Cold Drinks', image: require('../assets/Category/Drinks.png') },
+    { id: 1, title: 'Drinks', image: require('../assets/Category/Drinks.png') },
     { id: 2, title: 'Chocolate', image: require('../assets/Category/Chocolate.png') },
     { id: 3, title: 'Snack', image: require('../assets/Category/Snack.png') },
     { id: 4, title: 'Dairy', image: require('../assets/Category/Dairy.png') },
@@ -19,12 +19,12 @@ const Category = () => {
             <ScrollView horizontal={true} contentContainerStyle={styles.scrollView}>
                 {categories.map((item) => {
                     return (
-                        <TouchableOpacity key={item.id} style={styles.categoriesName}>
+                        <TouchableOpacity key={item.id}>
                             <Image
                                 source={item.image}
                                 style={styles.image}
                             />
-                            <Text style={[globalStyle.text, styles.section]}>{item.title}</Text>
+                            <Text style={[globalStyle.text, styles.categoryName]}>{item.title}</Text>
                         </TouchableOpacity>
                     );
                 })}
@@ -47,27 +47,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 5,
     },
-    categoriesName: {
-        marginHorizontal: 10,
-        marginVertical: 5,
-        backgroundColor: '#ffffff',
-        borderRadius: 25,
-        padding: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4.65,
-        elevation: 8,
-    },
     scrollView: {
         paddingHorizontal: 10,
     },
     image: {
-        height: 50,
-        width: 50,
-        borderRadius: 25,
-        marginBottom: 5, // Added margin for spacing between image and text
+        height: 45,
+        width: 45,
+        marginHorizontal: 10,
+        marginVertical: 5,
     },
+    categoryName: {
+        fontSize: RFValue(10),
+        textAlign: 'center',
+        marginHorizontal: 5,
+    }
 });

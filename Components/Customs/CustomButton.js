@@ -17,11 +17,11 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
     btn: {
-        shadowColor: '#000',         // Color of the shadow
-        shadowOffset: { width: 0, height: 2 }, // Position of the shadow
-        shadowOpacity: 0.25,        // Opacity of the shadow
-        shadowRadius: 3.84,         // Blur radius of the shadow
-        elevation: 5,               // Required for Android to cast shadow
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 }, 
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
         alignItems: 'center',
     },
     container_Primary: {
